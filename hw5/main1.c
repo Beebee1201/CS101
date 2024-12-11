@@ -31,13 +31,11 @@
                         :++-                                                                                      
 *******************************************************************************/
 
-#include <stdio.h>
-
 int main()
 {
     int n = 7;
-    for(int i = 1;i<8;i++){
-        for(int j = 7;j>=i;j--){
+    for(int i = 1;i<=n;i++){
+        for(int j = n;j>=i;j--){
             printf(" ");
         }
         for(int j = 1;j<=i;j++){
