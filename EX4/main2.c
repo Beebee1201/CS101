@@ -18,7 +18,7 @@ int main() {
             break;
         }
     }
-    printf("%d",(count*2)+1);
+    printf("%d,%5f",(count*2)+1,ipi/100000.0);
     
     return 0;
 }
