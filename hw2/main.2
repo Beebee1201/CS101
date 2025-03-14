@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    FILE *file1 = fopen("main.c", "rb");  
+    FILE *file2 = fopen("main.txt", "wb");
+
+    char buffer[1024];
+    size_t bytesRead;
+
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer), file1)) > 0) {
+        fwrite(buffer, 1, bytesRead, file2); 
+    }
+
+    fclose(file1);
+    fclose(file2);
+
+    return 0;
+}
