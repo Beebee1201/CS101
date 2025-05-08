@@ -1,0 +1,114 @@
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class tictactoe{
+    public:
+        char board[9] = {'1','2','3','4','5','6','7','8','9'};
+        char sign[3] = {'t','X','O'};
+        int counter = 0;
+        void print_board(){
+            for(int i = 0;i<=2;i++){
+                for(int j = 0;j<=1;j++){
+                    cout<<" "<<board[(i*3)+j]<<" |";
+                }
+                cout<<" "<<board[(i*3)+2]<<" \n";
+                if(i<2){
+                    cout<<"---+---+---\n"; 
+                }
+                
+            }
+        }
+        
+        void play(int player){
+            int num = 0;
+            while(true){
+                cout<<"==> Player "<<player<<" ("<<sign[player]<<"), enter a number:";
+                cin>>num;
+                if(cin.fail()||(board[num-1]=='X'||board[num-1]=='O')||(num>9||num<1)){
+                    cin.clear();
+                    cin.ignore();
+                    cout<<"==> Invalid value, please enter again\n";
+                }
+                else{
+                    break;
+                }
+            }
+
+            board[num-1] = sign[player];
+            counter+=1;
+        }
+        
+        int checkwin(){
+            int win = 0;
+            for(int i=0;i<=2;i++){
+                if((board[i] == board[i+3])&&(board[i] == board[i+6])){
+                    if(board[i] == 'X'){
+                        win = 1;
+                    }
+                    else{
+                        win = 2;
+                    }
+                    break;
+                }
+                else if((board[i*3] == board[i*3+1])&&(board[i*3] == board[i*3+2])){
+                    if(board[i*3] == 'X'){
+                        win = 1;
+                    }
+                    else{
+                        win = 2;
+                    }
+                    break;
+                }
+            }
+            if(win == 0){
+                if(((board[0] == board[4]) && (board[0]== board[8]))||((board[2] == board[4])&&(board[2] == board[6]))){
+                    if(board[4] == 'X'){
+                        win = 1;
+                    }
+                    else{
+                        win = 2;
+                    }
+                }
+            }
+
+            if(win == 1){
+                cout<<"==> Player 1 wins!\n";
+            }
+            else if(win == 2){
+                cout<<"==> Player 2 wins!\n";
+            }
+            else if(counter>=9){
+                win = 3;
+                cout<<"==> Game draw\n";
+            }
+            return win;
+        }
+
+        
+        
+        void gamestart(){
+            cout<<"-- Tic Tac Toe -- CSIE@CGU\n";
+            cout<<"Player 1 (X) - Player 2 (O)\n";
+            print_board();
+            int n = 0;
+            while(true){
+                play((n++%2)+1);
+                print_board();
+                if(checkwin()>0){
+                    break;
+                }
+            }
+        }
+        
+};
+
+
+int main(){
+    tictactoe t;
+    t.gamestart();
+
+    return 0;
+}
